@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace ZooManager
@@ -162,25 +162,26 @@ namespace ZooManager
                     if (chick != null && chick.turnsSinceLastHunt > 3) //corpse if it doesn't eat for 3 rounds.
                     {
                         zone.occupant = new Corpse();
-                        if (chick != null && chick.totalTurns > 3) //grow up!!!
+                       
+                    }
+                    if (chick != null && chick.totalTurns > 3 && chick.turnsSinceLastHunt < 3) //grow up!!!
+                    {
+                        Random random = new Random();
+                        int choice = random.Next(10);
+                        if (choice < 2)
                         {
-                            Random random = new Random();
-                            int choice = random.Next(10);
-                            if (choice < 2)
-                            {
-                                zone.occupant = new Raptor("raptor");
-                            }
-                            else if (choice < 7) // The probability of a rooster is 1 in 2
-                            {
-                                zone.occupant = new Rooster("rooster");
-                            }
-                            else // The remaining 1/3 probability is allocated to Vultures
-                            {
-                                zone.occupant = new Vulture("vulture");
-                            }
+                            zone.occupant = new Raptor("raptor");
+                        }
+                        else if (choice < 7) // The probability of a rooster is 1 in 2
+                        {
+                            zone.occupant = new Rooster("rooster");
+                        }
+                        else // The remaining 1/3 probability is allocated to Vultures
+                        {
+                            zone.occupant = new Vulture("vulture");
                         }
                     }
-                   
+
                 }
             }
             for (var y = 0; y < numCellsY; y++)
@@ -195,6 +196,7 @@ namespace ZooManager
                     }
                 }
             }
+           
             for (var y = 0; y < numCellsY; y++)
             {
                 for (var x = 0; x < numCellsX; x++)
